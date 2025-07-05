@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 30% 95%;
+    --foreground: 180 36% 25%;
+
+    --card: 40 30% 95%;
+    --card-foreground: 180 36% 25%;
+
+    --popover: 40 30% 95%;
+    --popover-foreground: 180 36% 25%;
+
+    --primary: 180 36% 25%;
+    --primary-foreground: 40 30% 95%;
+
+    --secondary: 180 36% 35%;
+    --secondary-foreground: 40 30% 95%;
+
+    --muted: 210 15% 92%;
+    --muted-foreground: 210 15% 50%;
+
+    --accent: 180 36% 35%;
+    --accent-foreground: 40 30% 95%;
+
+    --destructive: 0 80% 50%;
+    --destructive-foreground: 40 30% 95%;
+
+    --border: 210 16% 85%;
+    --input: 210 16% 85%;
+    --ring: 180 36% 25%;
+
+    --radius: 0.75rem;
+
+    --gradient-primary: linear-gradient(135deg, hsl(180, 36%, 25%) 0%, hsl(180, 36%, 35%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(180, 36%, 35%) 0%, hsl(210, 15%, 50%) 100%);
+    --gradient-success: linear-gradient(135deg, hsl(160, 100%, 40%) 0%, hsl(180, 60%, 45%) 100%);
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+  }
+
+  .dark {
+    --background: 220 10% 10%;
+    --foreground: 180 36% 85%;
+
+    --card: 220 10% 12%;
+    --card-foreground: 180 36% 85%;
+
+    --primary: 180 36% 85%;
+    --primary-foreground: 220 10% 10%;
+
+    --accent: 180 36% 50%;
+    --accent-foreground: 220 10% 10%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(220 13% 12%) 100%);
+    min-height: 100vh;
+  }
+
+  .dark body {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(220 20% 4%) 100%);
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+  }
+
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-secondary {
+    background: var(--gradient-secondary);
+  }
+
+  .gradient-success {
+    background: var(--gradient-success);
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-foreground-gradient {
+    color: var(--accent);
+  }
+
+  .hover-scale {
+    transition: transform 0.3s ease;
+  }
+
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+}
