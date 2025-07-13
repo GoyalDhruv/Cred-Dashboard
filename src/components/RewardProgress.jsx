@@ -4,11 +4,10 @@ import { Progress } from '@/components/ui/progress';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
 import { useDashboard } from '@/context/DashboardContext';
+import { RewardRadialChart } from './RewardRadialChart';
 
 export function RewardProgress() {
   const [progress, setProgress] = useState(0);
-  const [radialProgress, setRadialProgress] = useState(0);
-
   const { isLoading, rewardData } = useDashboard();
 
   useEffect(() => {
@@ -16,15 +15,10 @@ export function RewardProgress() {
       const timer = setTimeout(() => {
         const progressPercent = (rewardData.currentPoints / rewardData.nextMilestone) * 100;
         setProgress(progressPercent);
-        setRadialProgress(progressPercent);
       }, 800);
       return () => clearTimeout(timer);
     }
-  }, [isLoading]);
-
-  const circumference = 2 * Math.PI * 45;
-  const strokeDasharray = circumference;
-  const strokeDashoffset = circumference - (radialProgress / 100) * circumference;
+  }, [isLoading, rewardData]);
 
   if (isLoading) {
     return (
@@ -62,54 +56,15 @@ export function RewardProgress() {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      {/* Radial Progress */}
+
+      {/* Radial Progress with Recharts */}
       <Card className="glass border-0 shadow-xl hover-scale transition-all duration-300">
         <CardHeader>
           <CardTitle className="text-center text-gradient">Reward Points</CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="flex justify-center">
-            <div className="relative">
-              <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 100 100">
-                {/* Background circle */}
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="45"
-                  stroke="currentColor"
-                  strokeWidth="8"
-                  fill="transparent"
-                  className="text-muted/20"
-                />
-                {/* Progress circle */}
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="45"
-                  stroke="url(#gradient)"
-                  strokeWidth="8"
-                  fill="transparent"
-                  strokeDasharray={strokeDasharray}
-                  strokeDashoffset={strokeDashoffset}
-                  strokeLinecap="round"
-                  className="transition-all duration-1000 ease-out"
-                />
-                <defs>
-                  <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="hsl(var(--primary))" />
-                    <stop offset="100%" stopColor="hsl(var(--secondary))" />
-                  </linearGradient>
-                </defs>
-              </svg>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-gradient">
-                    {Math.round(progress)}%
-                  </div>
-                  <div className="text-xs text-muted-foreground">Complete</div>
-                </div>
-              </div>
-            </div>
+            <RewardRadialChart percentage={Math.round(progress)} />
           </div>
 
           <div className="text-center space-y-2">
