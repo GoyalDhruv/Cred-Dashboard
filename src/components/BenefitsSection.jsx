@@ -5,84 +5,16 @@ import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useToast } from '@/hooks/useToast';
 import { CheckCircle, Clock, Star, Gift } from 'lucide-react';
+import { useDashboard } from '@/context/DashboardContext';
 
-export function BenefitsSection({ isLoading = false }) {
+export function BenefitsSection() {
   const { toast } = useToast();
 
-  const [benefits, setBenefits] = useState([
-    {
-      id: '1',
-      title: 'Netflix Premium',
-      description: 'Get 3 months free Netflix Premium subscription',
-      icon: '🎬',
-      discount: '₹597 OFF',
-      category: 'Entertainment',
-      claimed: false,
-      expiresIn: '2 days',
-    },
-    {
-      id: '2',
-      title: 'Zomato Gold',
-      description: 'Free delivery on your next 10 orders',
-      icon: '🍕',
-      discount: 'FREE',
-      category: 'Food',
-      claimed: false,
-      expiresIn: '5 days',
-    },
-    {
-      id: '3',
-      title: 'Uber Rides',
-      description: '50% off on your next 5 Uber rides',
-      icon: '🚗',
-      discount: '50% OFF',
-      category: 'Travel',
-      claimed: false,
-      expiresIn: '1 week',
-    },
-    {
-      id: '4',
-      title: 'Myntra Fashion',
-      description: 'Exclusive access to end of season sale',
-      icon: '👕',
-      discount: '70% OFF',
-      category: 'Fashion',
-      claimed: false,
-      expiresIn: '3 days',
-    },
-    {
-      id: '5',
-      title: 'BookMyShow',
-      description: 'Buy 1 get 1 free movie tickets',
-      icon: '🎭',
-      discount: 'BOGO',
-      category: 'Entertainment',
-      claimed: false,
-      expiresIn: '1 week',
-    },
-    {
-      id: '6',
-      title: 'Amazon Prime',
-      description: '6 months free Amazon Prime membership',
-      icon: '📦',
-      discount: '₹999 OFF',
-      category: 'Shopping',
-      claimed: false,
-      expiresIn: '2 weeks',
-    },
-  ]);
+  const { isLoading, benefits, claimBenefit } = useDashboard();
 
-  const handleClaim = (benefitId) => {
-    setBenefits((prev) =>
-      prev.map((benefit) =>
-        benefit.id === benefitId ? { ...benefit, claimed: true } : benefit
-      )
-    );
-
-    toast({
-      title: 'Benefit Claimed! 🎉',
-      description: 'Your benefit has been successfully claimed and will be available in your account.',
-    });
+  const handleClaim = (id) => {
+    claimBenefit(id);
+    toast({ title: 'Benefit Claimed!', description: 'Your benefit has been claimed.' });
   };
 
   const getIconComponent = (category) => {
@@ -170,8 +102,8 @@ export function BenefitsSection({ isLoading = false }) {
 
               <Button
                 className={`w-full transition-all duration-300 ${benefit.claimed
-                    ? 'bg-green-500/20 text-green-600 cursor-not-allowed'
-                    : 'gradient-primary hover:shadow-lg text-white border-0'
+                  ? 'bg-green-500/20 text-green-600 cursor-not-allowed'
+                  : 'gradient-primary hover:shadow-lg text-white border-0'
                   }`}
                 onClick={() => !benefit.claimed && handleClaim(benefit.id)}
                 disabled={benefit.claimed}

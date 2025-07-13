@@ -4,19 +4,12 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useDashboard } from "@/context/DashboardContext";
 
-export function UserProfile({ isLoading = false }) {
+export function UserProfile() {
   const [xpProgress, setXpProgress] = useState(0);
 
-  const userData = {
-    name: "Alex Kumar",
-    level: 12,
-    currentXP: 2400,
-    maxXP: 3000,
-    title: "CRED Elite",
-    avatar:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
-  };
+  const { isLoading, userData } = useDashboard();
 
   useEffect(() => {
     if (!isLoading) {

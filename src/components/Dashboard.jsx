@@ -1,23 +1,16 @@
-
-import { useState, useEffect } from 'react';
 import { UserProfile } from './UserProfile';
 import { BenefitsSection } from './BenefitsSection';
 import { RewardProgress } from './RewardProgress';
 import { ThemeToggle } from './ThemeToggle';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { useDashboard } from '@/context/DashboardContext';
 
 export function Dashboard() {
-  const [isLoading, setIsLoading] = useState(true);
+  const { isLoading, rewardData, benefits } = useDashboard();
 
-  useEffect(() => {
-    // Simulate loading
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
+  const claimedBenefitsCount = benefits.filter(b => b.claimed).length;
+  const satisfactionScore = 98; // Placeholder (You can connect this to context or API later)
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
@@ -38,7 +31,7 @@ export function Dashboard() {
 
             <div className="flex items-center space-x-4">
               <Badge variant="outline" className="gradient-success text-white border-0 animate-pulse-slow">
-                🔥 5 new offers
+                🔥 {benefits.filter(b => !b.claimed).length} new offers
               </Badge>
               <ThemeToggle />
             </div>
@@ -60,17 +53,17 @@ export function Dashboard() {
 
         {/* User Profile */}
         <div className="animate-fade-in">
-          <UserProfile isLoading={isLoading} />
+          <UserProfile />
         </div>
 
         {/* Reward Progress */}
         <div className="animate-fade-in" style={{ animationDelay: '0.1s' }}>
-          <RewardProgress isLoading={isLoading} />
+          <RewardProgress />
         </div>
 
         {/* Benefits Section */}
         <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
-          <BenefitsSection isLoading={isLoading} />
+          <BenefitsSection />
         </div>
 
         {/* Quick Stats */}
@@ -78,21 +71,27 @@ export function Dashboard() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-fade-in" style={{ animationDelay: '0.3s' }}>
             <Card className="glass border-0 shadow-lg hover-scale">
               <CardContent className="p-6 text-center">
-                <div className="text-2xl font-bold text-gradient">₹45,320</div>
+                <div className="text-2xl font-bold text-gradient">
+                  ₹{rewardData.totalEarned.toLocaleString()}
+                </div>
                 <div className="text-sm text-muted-foreground">Money Saved</div>
               </CardContent>
             </Card>
 
             <Card className="glass border-0 shadow-lg hover-scale">
               <CardContent className="p-6 text-center">
-                <div className="text-2xl font-bold text-gradient">127</div>
+                <div className="text-2xl font-bold text-gradient">
+                  {claimedBenefitsCount}
+                </div>
                 <div className="text-sm text-muted-foreground">Benefits Claimed</div>
               </CardContent>
             </Card>
 
             <Card className="glass border-0 shadow-lg hover-scale">
               <CardContent className="p-6 text-center">
-                <div className="text-2xl font-bold text-gradient">98%</div>
+                <div className="text-2xl font-bold text-gradient">
+                  {satisfactionScore}%
+                </div>
                 <div className="text-sm text-muted-foreground">Satisfaction Score</div>
               </CardContent>
             </Card>

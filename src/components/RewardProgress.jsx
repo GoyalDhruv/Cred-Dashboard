@@ -3,19 +3,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
+import { useDashboard } from '@/context/DashboardContext';
 
-export function RewardProgress({ isLoading = false }) {
+export function RewardProgress() {
   const [progress, setProgress] = useState(0);
   const [radialProgress, setRadialProgress] = useState(0);
 
-  const rewardData = {
-    currentPoints: 15640,
-    nextMilestone: 20000,
-    totalEarned: 45320,
-    tier: 'Platinum',
-    nextTier: 'Diamond',
-    pointsToNextTier: 4360,
-  };
+  const { isLoading, rewardData } = useDashboard();
 
   useEffect(() => {
     if (!isLoading) {
