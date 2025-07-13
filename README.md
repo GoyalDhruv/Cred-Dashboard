@@ -56,34 +56,11 @@ npm install
 npm run dev
 ```
 
-🚀 Live Demo
-Deployed on Vercel:
-https://cred-dashboard-chi.vercel.app/
+## 🚀 Live Demo
+### Deployed on Vercel: https://cred-dashboard-chi.vercel.app/
 
 
-📷 Screenshots
+## 📷 Screenshots
 ![Dashboard Overview](./public/dashboard1.png)
 ![Benefits Section](./public/dashboard2.png)
 ![Reward Progress](./public/dashboard3.png)
-
-
-📁 Project Structure
-src/
-  components/       # Reusable UI Components
-  context/          # Global State with React Context
-  mocks/            # Local Mock JSON Data (User, Rewards, Benefits)
-  providers/        # Theme Provider for Dark/Light Mode
-  App.jsx           # Root App Component
-  main.jsx          # Entry Point
-
-public/
-  logo.png          # Logo Image
-  dashboard1.png    # Screenshot 1
-  dashboard2.png    # Screenshot 2
-  dashboard3.png    # Screenshot 3
-
-
-✅ Submission Links
-
-GitHub Repo	https://github.com/GoyalDhruv/Cred-Dashboard
-Live Demo	https://cred-dashboard-chi.vercel.app/
