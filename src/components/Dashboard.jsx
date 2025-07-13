@@ -11,7 +11,7 @@ export function Dashboard() {
   const { isLoading, rewardData, benefits } = useDashboard();
 
   const claimedBenefitsCount = benefits.filter(b => b.claimed).length;
-  const satisfactionScore = 98; // Placeholder (You can connect this to context or API later)
+  const satisfactionScore = 98;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
