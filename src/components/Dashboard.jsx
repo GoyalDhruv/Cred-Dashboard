@@ -5,6 +5,7 @@ import { ThemeToggle } from './ThemeToggle';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useDashboard } from '@/context/DashboardContext';
+import { AnimatedWrapper } from './AnimatedWrapper';
 
 export function Dashboard() {
   const { isLoading, rewardData, benefits } = useDashboard();
@@ -52,61 +53,63 @@ export function Dashboard() {
         )}
 
         {/* User Profile */}
-        <div className="animate-fade-in">
+        <AnimatedWrapper>
           <UserProfile />
-        </div>
+        </AnimatedWrapper>
 
         {/* Reward Progress */}
-        <div className="animate-fade-in" style={{ animationDelay: '0.1s' }}>
+        <AnimatedWrapper delay={0.1}>
           <RewardProgress />
-        </div>
+        </AnimatedWrapper>
 
         {/* Benefits Section */}
-        <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
+        <AnimatedWrapper style={{ animationDelay: '0.2s' }}>
           <BenefitsSection />
-        </div>
+        </AnimatedWrapper>
 
         {/* Quick Stats */}
-        {!isLoading && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-            <Card className="glass border-0 shadow-lg hover-scale">
-              <CardContent className="p-6 text-center">
-                <div className="text-2xl font-bold text-gradient">
-                  ₹{rewardData.totalEarned.toLocaleString()}
-                </div>
-                <div className="text-sm text-muted-foreground">Money Saved</div>
-              </CardContent>
-            </Card>
+        {
+          !isLoading && (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+              <Card className="glass border-0 shadow-lg hover-scale">
+                <CardContent className="p-6 text-center">
+                  <div className="text-2xl font-bold text-gradient">
+                    ₹{rewardData.totalEarned.toLocaleString()}
+                  </div>
+                  <div className="text-sm text-muted-foreground">Money Saved</div>
+                </CardContent>
+              </Card>
 
-            <Card className="glass border-0 shadow-lg hover-scale">
-              <CardContent className="p-6 text-center">
-                <div className="text-2xl font-bold text-gradient">
-                  {claimedBenefitsCount}
-                </div>
-                <div className="text-sm text-muted-foreground">Benefits Claimed</div>
-              </CardContent>
-            </Card>
+              <Card className="glass border-0 shadow-lg hover-scale">
+                <CardContent className="p-6 text-center">
+                  <div className="text-2xl font-bold text-gradient">
+                    {claimedBenefitsCount}
+                  </div>
+                  <div className="text-sm text-muted-foreground">Benefits Claimed</div>
+                </CardContent>
+              </Card>
 
-            <Card className="glass border-0 shadow-lg hover-scale">
-              <CardContent className="p-6 text-center">
-                <div className="text-2xl font-bold text-gradient">
-                  {satisfactionScore}%
-                </div>
-                <div className="text-sm text-muted-foreground">Satisfaction Score</div>
-              </CardContent>
-            </Card>
-          </div>
-        )}
-      </main>
+              <Card className="glass border-0 shadow-lg hover-scale">
+                <CardContent className="p-6 text-center">
+                  <div className="text-2xl font-bold text-gradient">
+                    {satisfactionScore}%
+                  </div>
+                  <div className="text-sm text-muted-foreground">Satisfaction Score</div>
+                </CardContent>
+              </Card>
+            </div>
+          )
+        }
+      </main >
 
       {/* Footer */}
-      <footer className="glass border-t border-white/10 mt-16">
+      < footer className="glass border-t border-white/10 mt-16" >
         <div className="container mx-auto px-4 py-6">
           <div className="text-center text-sm text-muted-foreground">
             <p>© 2024 CRED Garage</p>
           </div>
         </div>
-      </footer>
-    </div>
+      </footer >
+    </div >
   );
 }
