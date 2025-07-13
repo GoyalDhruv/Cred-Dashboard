@@ -104,7 +104,7 @@ export function Dashboard() {
       <footer className="glass border-t border-white/10 mt-16">
         <div className="container mx-auto px-4 py-6">
           <div className="text-center text-sm text-muted-foreground">
-            <p>© 2024 CRED Garage. Crafted with ❤️ for premium members.</p>
+            <p>© 2024 CRED Garage</p>
           </div>
         </div>
       </footer>
