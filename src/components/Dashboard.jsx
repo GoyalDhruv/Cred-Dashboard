@@ -22,7 +22,7 @@ export function Dashboard() {
             <div className="flex items-center space-x-3">
               <div className="w-8 h-8 gradient-primary rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">
-                  <img src="/src/assets/images/logo.png" alt="Logo" width={32} height={32} />
+                  <img src="/logo.png" alt="Logo" width={32} height={32} />
                 </span>
               </div>
               <div>
